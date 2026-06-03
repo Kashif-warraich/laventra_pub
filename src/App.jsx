@@ -1,4 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Splash from './Splash.jsx';
+
+// Show the intro splash once per browser session, and never for visitors who
+// prefer reduced motion.
+function shouldShowSplash() {
+  if (typeof window === 'undefined') return false;
+  const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return false;
+  return !window.sessionStorage?.getItem('laventra_splash_seen');
+}
 
 const navLinks = [
   ['How it works', '#how'],
@@ -191,8 +201,17 @@ function DashboardChart() {
 }
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(shouldShowSplash);
+
+  function dismissSplash() {
+    window.sessionStorage?.setItem('laventra_splash_seen', '1');
+    setShowSplash(false);
+  }
+
   return (
     <>
+      {showSplash && <Splash onDone={dismissSplash} />}
+
       <nav className="nav">
         <div className="container nav-inner">
           <Wordmark />
