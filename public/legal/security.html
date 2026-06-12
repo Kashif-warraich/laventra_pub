@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security · Laventra</title>
+    <meta name="robots" content="index, follow" />
+    <style>
+      :root { --bg:#060E1C; --ink:#e6edf7; --ink-2:#8a99b3; --ink-3:#5a6478; --sky:#5BBAFF; --line:rgba(91,186,255,.14); }
+      * { box-sizing: border-box; }
+      body { margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans',system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+      .wrap { max-width:760px; margin:0 auto; padding:64px 24px 96px; }
+      a { color:var(--sky); }
+      .back { display:inline-block; margin-bottom:32px; font-size:14px; }
+      .wm { font-weight:800; letter-spacing:-.035em; font-size:22px; text-decoration:none; color:var(--ink); }
+      .wm .t{color:#2B7FFF}.wm .r{color:#00D4AA}.wm .a{color:#00C896}
+      h1 { font-size:clamp(30px,5vw,44px); letter-spacing:-.03em; margin:24px 0 8px; }
+      h2 { font-size:21px; letter-spacing:-.01em; margin:40px 0 10px; }
+      p, li { color:var(--ink-2); }
+      ul { padding-left:20px; }
+      .meta { font-size:13px; color:var(--ink-3); font-family:'JetBrains Mono',monospace; letter-spacing:.04em; }
+      hr { border:0; border-top:1px solid var(--line); margin:48px 0; }
+      footer { font-size:13px; color:var(--ink-3); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">&larr; Back to laventra.io</a>
+      <a class="wm" href="/">laven<span class="t">t</span><span class="r">r</span><span class="a">a</span></a>
+      <h1>Security</h1>
+      <p class="meta">Last updated: 9 June 2026</p>
+
+      <p>Security is a first-order feature for a product that watches your revenue. Here is how we protect it.</p>
+
+      <h2>Data protection</h2>
+      <ul>
+        <li>TLS 1.2+ for all data in transit; AES-256 encryption at rest.</li>
+        <li>Number plates are hashed with a per-tenant salt <strong>on the on-site device</strong> — readable plates never traverse the network.</li>
+        <li>Tenant data is logically isolated; access is scoped per account.</li>
+      </ul>
+
+      <h2>Access control</h2>
+      <ul>
+        <li>Role-based access in the dashboard (owner, operator, viewer).</li>
+        <li>SSO/SAML available on Group plans; enforced MFA for Laventra staff.</li>
+        <li>Least-privilege internal access, reviewed quarterly and logged.</li>
+      </ul>
+
+      <h2>Resilience</h2>
+      <ul>
+        <li>The on-site box buffers up to 14 days locally and syncs in order when connectivity returns — so an outage never costs you a count.</li>
+        <li>Encrypted, regularly tested backups with defined RPO/RTO targets.</li>
+      </ul>
+
+      <h2>Compliance</h2>
+      <p>GDPR-aligned and CCPA-ready, with a signed <a href="/legal/dpa.html">DPA</a> available. SOC 2 Type II is in progress; the current report and our latest penetration-test summary are available under NDA.</p>
+
+      <h2>Reporting a vulnerability</h2>
+      <p>We welcome responsible disclosure. Email <a href="mailto:security@laventra.io">security@laventra.io</a> with details and we will acknowledge within two business days. Please do not access data that is not yours or degrade the service while testing.</p>
+
+      <hr />
+      <footer>© 2026 Laventra · <a href="/legal/privacy.html">Privacy</a> · <a href="/legal/terms.html">Terms</a> · <a href="/legal/dpa.html">DPA</a></footer>
+    </div>
+  </body>
+</html>

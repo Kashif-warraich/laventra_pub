@@ -24,3 +24,6 @@ coverage/
 
 # Visual Studio
 .vs/
+
+# Graphify generated knowledge graph
+graphify-out/

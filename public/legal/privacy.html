@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy · Laventra</title>
+    <meta name="robots" content="index, follow" />
+    <style>
+      :root { --bg:#060E1C; --ink:#e6edf7; --ink-2:#8a99b3; --ink-3:#5a6478; --sky:#5BBAFF; --line:rgba(91,186,255,.14); }
+      * { box-sizing: border-box; }
+      body { margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans',system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+      .wrap { max-width:760px; margin:0 auto; padding:64px 24px 96px; }
+      a { color:var(--sky); }
+      .back { display:inline-block; margin-bottom:32px; font-size:14px; }
+      .wm { font-weight:800; letter-spacing:-.035em; font-size:22px; text-decoration:none; color:var(--ink); }
+      .wm .t{color:#2B7FFF}.wm .r{color:#00D4AA}.wm .a{color:#00C896}
+      h1 { font-size:clamp(30px,5vw,44px); letter-spacing:-.03em; margin:24px 0 8px; }
+      h2 { font-size:21px; letter-spacing:-.01em; margin:40px 0 10px; }
+      p, li { color:var(--ink-2); }
+      ul { padding-left:20px; }
+      .meta { font-size:13px; color:var(--ink-3); font-family:'JetBrains Mono',monospace; letter-spacing:.04em; }
+      hr { border:0; border-top:1px solid var(--line); margin:48px 0; }
+      footer { font-size:13px; color:var(--ink-3); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">&larr; Back to laventra.io</a>
+      <a class="wm" href="/">laven<span class="t">t</span><span class="r">r</span><span class="a">a</span></a>
+      <h1>Privacy Policy</h1>
+      <p class="meta">Last updated: 9 June 2026</p>
+
+      <p>Laventra builds computer-vision software that counts vehicles through car-wash bays and reconciles them against point-of-sale data. This policy explains what we process, why, and the choices you have. We process <strong>vehicles, not faces</strong>.</p>
+
+      <h2>What we process</h2>
+      <ul>
+        <li><strong>Vehicle inference metadata</strong> — vehicle class (sedan, SUV, truck, etc.), timestamps, confidence scores, and bay/lane identifiers.</li>
+        <li><strong>Plate hashes</strong> — where loyalty matching is enabled, a number plate is converted into a salted, irreversible hash <em>on the on-site device</em> before anything leaves your bay. We never store or transmit a readable plate.</li>
+        <li><strong>POS records</strong> — ticket and transaction data you connect, used solely to reconcile counts.</li>
+        <li><strong>Account data</strong> — names and work emails of the operators and owners who use the dashboard.</li>
+      </ul>
+
+      <h2>Video</h2>
+      <p>Camera video is owned by you, the operator. Audit clips are retained on the terms of your plan (24 months by default) and are accessible only to your authorized users and to Laventra staff acting on a support request you raise.</p>
+
+      <h2>How we use it</h2>
+      <p>To provide the counting, reconciliation, alerting, and reporting features you configure; to secure and improve the service; and to meet legal obligations. We do not sell personal data, and we do not use your data to train models for other customers without a separate written agreement.</p>
+
+      <h2>Legal bases (GDPR) &amp; your rights</h2>
+      <p>We rely on legitimate interest and contractual necessity to operate the service. If you are in the EEA or UK, you may request access, correction, deletion, restriction, or portability of personal data. If you are a California resident, you have equivalent rights under the CCPA/CPRA, including the right not to be discriminated against for exercising them. Email <a href="mailto:privacy@laventra.io">privacy@laventra.io</a> and we will respond within 30 days.</p>
+
+      <h2>Sub-processors &amp; security</h2>
+      <p>We use a short list of infrastructure sub-processors under data-processing terms. Data is encrypted in transit and at rest. See our <a href="/legal/security.html">Security overview</a> and <a href="/legal/dpa.html">Data Processing Addendum</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Data controller enquiries: <a href="mailto:privacy@laventra.io">privacy@laventra.io</a>.</p>
+
+      <hr />
+      <footer>© 2026 Laventra · <a href="/legal/terms.html">Terms</a> · <a href="/legal/dpa.html">DPA</a> · <a href="/legal/security.html">Security</a></footer>
+    </div>
+  </body>
+</html>

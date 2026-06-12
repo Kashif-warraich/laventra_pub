@@ -13,7 +13,7 @@ function shouldShowSplash() {
 const navLinks = [
   ['How it works', '#how'],
   ['Features', '#features'],
-  ['Dashboard', '#dashboard'],
+  ['The app', '#dashboard'],
   ['Pricing', '#pricing'],
   ['FAQ', '#faq'],
 ];
@@ -40,31 +40,51 @@ const problems = [
 ];
 
 const steps = [
-  ['01', 'Point the camera at the bay', 'Any IP cam above 720p with a clear view of the entry lane. We will send a mount if you need one.', 'camera'],
-  ['02', 'AI classifies every vehicle', 'Sedan, SUV, truck, motorbike - with a confidence score and a time-stamped clip in the audit log.', 'car'],
-  ['03', 'Reconcile against your POS', 'We pull your ticket data through a one-time API connect and match it car-by-car, ticket-by-ticket.', 'sliders'],
-  ['04', 'You get the truth - every shift', 'Auto-generated end-of-shift report with the gap, the timestamps, and the operator on the bay.', 'chart'],
+  ['01', 'A camera watches the lane', 'One IP camera over each bay streams the entry lane to the on-site AI box. Any 720p+ feed works - no tunnels, no loops in the concrete.', 'camera'],
+  ['02', 'The AI logs every vehicle', 'On-device, it reads each vehicle - class and plate - and writes a time-stamped event, with a clip, the moment a wash starts.', 'chip'],
+  ['03', 'Events sync to the server', 'Counts, device health and alerts post to your account in real time, and buffer locally if the internet drops.', 'server'],
+  ['04', 'You watch from your phone', "Open the Laventra app to see today's washes, every event, and a push alert the second a bay goes down - across all your lavaggi.", 'phone'],
 ];
 
 const features = [
-  ['f-wide', 'clock', 'Live counter, second-by-second', 'Watch every bay in real time. Tap to see the last 24 vehicles, the operator on duty, and the queue depth.'],
-  ['f-narrow', 'mail', 'Shift reports', 'Auto-emailed at clock-out. PDF + CSV.'],
-  ['f-narrow', 'star', 'Loyalty match', 'Pair counts to member plates and flag suspicious cards.'],
-  ['f-wide', 'table', 'Reconciliation that closes itself', 'Tickets-to-cars matched automatically. Mismatches are bucketed by reason: free-wash, voided ticket, manual entry, or no ticket at all. Every flagged event has the clip attached.'],
-  ['f-narrow', 'check', 'POS connectors', 'Square, Clover, Toast, ICS, DRB and custom API.'],
-  ['f-narrow', 'box', 'Offline-safe', 'Buffers locally if internet drops. Syncs back.'],
-  ['f-narrow', 'bell', 'Anomaly alerts', 'SMS the manager the moment a bay drifts above 5%.'],
-  ['f-wide', 'user', 'Multi-site, one roof', 'Switch between sites, compare shifts, benchmark operators. Owner-mode rolls up every bay into one P&L view, so you can finally answer which location is actually making money.'],
+  ['f-wide', 'clock', 'Live wash count', 'Watch every bay count up in real time from your phone. Tap any bay to see the last vehicles, the device on it, and the queue forming.'],
+  ['f-narrow', 'mail', 'Reports', 'One-tap PDF + CSV for any day, bay or site. Auto-generated and emailed at clock-out.'],
+  ['f-narrow', 'star', 'Loyalty match', 'Match washes to members via an on-device plate hash you control. Flags suspicious comp cards.'],
+  ['f-wide', 'table', 'Every wash is an event', 'The AI writes one time-stamped event per vehicle - plate, class, bay, and a clip. Browse, filter and search the whole log; nothing is just a number you have to trust.'],
+  ['f-narrow', 'check', 'Device health', 'Every camera and AI box, online or offline at a glance. Know a bay went dark before your staff does.'],
+  ['f-narrow', 'box', 'Offline-safe', 'Buffers locally if internet drops. Syncs back in order.'],
+  ['f-narrow', 'bell', 'Push alerts', 'A device drops or errors spike - your phone buzzes the same second, via push.'],
+  ['f-narrow', 'activity', 'Peak & queue alerts', 'Spot a line forming in real time and get pinged before cars drive off to the place down the road.'],
+  ['f-wide', 'user', 'All your lavaggi, one app', 'Switch between sites, compare shifts, benchmark operators. Owner-mode rolls every bay into one view, so you can finally answer which location is actually making money.'],
 ];
 
-const feedRows = [
-  ['14:38', 'SUV · Toyota RAV4', 'matched', false],
-  ['14:36', 'Sedan · class A', 'matched', false],
-  ['14:34', 'Hatch · unknown', 'no ticket', true],
-  ['14:31', 'SUV · class B', 'matched', false],
-  ['14:29', 'Sedan · class A', 'matched', false],
-  ['14:27', 'Truck · pickup', 'matched', false],
-  ['14:25', 'Sedan · class A', 'matched', false],
+// Mirrors the real Laventra mobile app (see laventra_mobile): a 2x2 stat grid,
+// the active-devices card, and the recent-events log the owner watches.
+const appStats = [
+  ["TODAY'S WASHES", '412', '+ live count', 'blue'],
+  ['ACTIVE DEVICES', '7/8', '1 offline', 'teal'],
+  ['PENDING ALERTS', '3', 'Needs review', 'amber'],
+  ['ERRORS', '2', 'Today', 'red'],
+];
+
+const appDevices = [
+  ['Bay 01 · Camera', 'Brisbane · Camera', 'camera', 'blue', 'On', 'teal'],
+  ['AI Box · Brisbane', 'Brisbane · AI', 'chip', 'purple', 'On', 'teal'],
+  ['Bay 03 · Camera', 'Naples · Camera', 'camera', 'red', 'Off', 'red'],
+];
+
+const appEvents = [
+  ['7BQ 4192', '14:38 · Bay 01', true],
+  ['RAV 221', '14:36 · Bay 01', true],
+  ['9KX 005', '14:34 · Bay 02', false],
+];
+
+const appNav = [
+  ['home', 'Home', true],
+  ['events', 'Events', false],
+  ['carwash', 'Lavaggi', false],
+  ['reports', 'Reports', false],
+  ['profile', 'Profile', false],
 ];
 
 const plans = [
@@ -75,7 +95,7 @@ const plans = [
     desc: 'For single-bay sites just starting to plug the leaks.',
     cta: 'Start a trial',
     featured: false,
-    items: ['1 bay · 1 camera', 'Live counter and shift reports', 'Square / Clover / Toast connectors', 'Email support'],
+    items: ['1 bay · 1 camera', 'Live app + event log', 'PDF / CSV reports', 'Email support'],
   },
   {
     name: 'Operator',
@@ -84,7 +104,7 @@ const plans = [
     desc: 'For multi-bay sites with real revenue to defend.',
     cta: 'Book a demo',
     featured: true,
-    items: ['Up to 6 bays per site', 'Anomaly SMS alerts', 'Loyalty / plate matching', 'Phone and chat support'],
+    items: ['Up to 6 bays per site', 'Push + SMS alerts', 'Loyalty / plate matching', 'Phone and chat support'],
   },
   {
     name: 'Group',
@@ -93,17 +113,34 @@ const plans = [
     desc: 'For chains, franchises and groups above 8 bays.',
     cta: 'Talk to sales',
     featured: false,
-    items: ['Unlimited bays · multi-site', 'Owner-mode P&L rollups', 'Custom POS / ERP API', 'Dedicated success manager'],
+    items: ['Unlimited bays · multi-site', 'Owner-mode rollups', 'Custom API & webhooks', 'Dedicated success manager'],
   },
 ];
 
 const faqs = [
   ['Do I need to buy new cameras?', 'No. Laventra runs on any IP camera at 720p or above with a clear view of the bay entry. If you do not have one, we will ship a $60 PoE camera as part of onboarding - yours to keep.'],
   ['How accurate is the counter, really?', 'Our deployed average across 42 sites is 99.4%. The remaining 0.6% is almost always two cars that enter back-to-back during peak, and we flag those for human review with a clip.'],
-  ['Will this work with my POS?', 'Out of the box: Square, Clover, Toast, ICS Sonny, DRB Patheon. Custom POS? We have integrated 7 of them in the last 12 months - the median connector takes us 4 days.'],
-  ['What about my customers privacy?', 'We process vehicles, not faces. Plate data is hashed on-device before it leaves your bay. You own the video; we retain inference metadata only. GDPR-aligned, with a signed DPA.'],
+  ['Which phones does the app run on?', 'Laventra is a native iOS and Android app - free for every user on your account, with Face ID / fingerprint login and push notifications. There is a read-only web view too, for the back office.'],
+  ['Can I run more than one car wash from the app?', 'Yes - Laventra is multi-site from day one. Each lavaggio rolls up its own washes, devices and alerts, and owner-mode gives you one combined view to compare them. Switch sites with a tap.'],
+  ['What about my customers privacy?', 'We process vehicles, not faces. Plates are turned into a salted, irreversible hash on-device before anything leaves your bay - that hash is what powers loyalty matching, so we never store or transmit a readable plate. You own the video; we keep inference metadata only. GDPR-aligned and CCPA-ready, with a signed DPA and SOC 2 Type II underway.'],
   ['What if my internet goes down?', 'The on-site box buffers up to 14 days locally. When connectivity returns, it syncs back in order. You never lose a count.'],
   ['How long does setup take?', 'For a single-bay site, you are live in under a day: 30 minutes for camera angle, 1 hour for POS connect, the rest is calibration. No concrete to break.'],
+  ['How does per-bay pricing work, and am I locked in?', 'A "bay" is one camera watching one wash lane. Billing is monthly with no contract - cancel any month - or save two months on an annual plan. Onboarding and your first PoE camera are included free; there is no setup fee.'],
+];
+
+const testimonials = [
+  {
+    quote: 'The first week we plugged it in, Laventra found 31 washes that never made it to a ticket. That is not a software bill anymore - that is a raise. I check it before I check the bank.',
+    initials: 'MD', name: "Marco D'Auria", role: 'Owner · Lavaggio Bahar (3 bays, Naples)',
+  },
+  {
+    quote: 'Reconciliation used to eat my whole Monday. Now the shift report lands in my inbox at clock-out and it already matches the POS. I got my mornings back.',
+    initials: 'SK', name: 'Sarah Keller', role: 'Operations Lead · NorthLane Wash (Denver)',
+  },
+  {
+    quote: 'The peak alert is the sleeper feature. We open the second bay the moment a line starts to form - we stopped handing the 5pm rush to the place down the road.',
+    initials: 'RA', name: 'Ravi Anand', role: 'Owner · 4-site group (Brisbane)',
+  },
 ];
 
 function Wordmark({ size = 24 }) {
@@ -128,6 +165,10 @@ function Icon({ name }) {
     box: <><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M9 12l2 2 4-4" /></>,
     bell: <><path d="M6 10a6 6 0 0112 0v4l2 2H4l2-2v-4z" /><path d="M10 19a2 2 0 004 0" /></>,
     user: <><circle cx="12" cy="8" r="4" /><path d="M4 21v-1a6 6 0 016-6h4a6 6 0 016 6v1" /></>,
+    activity: <path d="M3 12h4l3 8 4-16 3 8h4" />,
+    chip: <><rect x="7" y="7" width="10" height="10" rx="2" /><rect x="10" y="10" width="4" height="4" rx="1" /><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" /></>,
+    server: <><rect x="4" y="4" width="16" height="7" rx="2" /><rect x="4" y="13" width="16" height="7" rx="2" /><path d="M7.5 7.5h.01M7.5 16.5h.01" /></>,
+    phone: <><rect x="7" y="3" width="10" height="18" rx="2.5" /><path d="M10.5 18h3" /></>,
   };
 
   return (
@@ -147,56 +188,108 @@ function CheckMark({ size = 16 }) {
   );
 }
 
-function HeroCar() {
+// Small line icons for the app's bottom navigation bar.
+function PhoneNavIcon({ name }) {
+  const p = {
+    home: <path d="M4 11l8-7 8 7M6 10v9h12v-9" />,
+    events: <><rect x="4" y="5" width="16" height="16" rx="2" /><path d="M4 9h16M8 3v4M16 3v4" /></>,
+    carwash: <><path d="M6 16v-4l1.5-4h9L18 12v4M5 16h14v3H5z" /><path d="M9 9V6M12 9V5M15 9V6" /></>,
+    reports: <path d="M5 19V11M10 19V5M15 19v-6M20 19v-3" />,
+    profile: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0114 0" /></>,
+  };
   return (
-    <svg viewBox="0 0 740 260" aria-hidden="true">
-      <defs>
-        <linearGradient id="hBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#ffffff" /><stop offset="100%" stopColor="#c8d4e6" /></linearGradient>
-        <linearGradient id="hGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#cdd8e8" /><stop offset="100%" stopColor="#8a9bb8" /></linearGradient>
-        <linearGradient id="hRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#e6ecf5" /><stop offset="100%" stopColor="#7a869d" /></linearGradient>
-      </defs>
-      <ellipse cx="370" cy="244" rx="290" ry="8" fill="#000" opacity=".45" />
-      <path d="M 36 198 L 14 178 L 28 154 Q 60 130 120 122 L 200 102 Q 230 84 280 78 L 470 78 Q 530 86 580 110 L 660 132 Q 712 138 724 162 L 720 198 L 700 210 L 640 210 L 600 210 L 220 210 L 180 210 L 96 210 Z" fill="url(#hBody)" stroke="#0a1424" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M 168 102 Q 200 70 248 64 L 458 64 Q 510 70 540 102 L 558 132 L 158 132 Z" fill="url(#hGlass)" stroke="#0a1424" strokeWidth="2" />
-      <path d="M 360 70 L 358 130 L 372 130 L 374 70 Z" fill="#0a1424" />
-      <path d="M 490 144 L 580 144 Q 600 156 580 178 L 480 178 Q 470 168 478 156 Z" fill="#f0f4fa" stroke="#0a1424" strokeWidth="2" />
-      <path d="M 500 158 L 580 158" stroke="#0a1424" strokeWidth="1.4" opacity=".7" />
-      <path d="M 110 210 L 620 210 L 600 234 L 130 234 Z" fill="#e2e8f2" stroke="#0a1424" strokeWidth="1.6" />
-      <path d="M 38 162 L 80 152 L 86 170 L 44 178 Z" fill="#ffffff" stroke="#0a1424" strokeWidth="1.4" />
-      <path d="M 644 154 L 700 158 L 696 174 L 644 170 Z" fill="#0a1424" opacity=".88" />
-      {[['170', 42, 38, 28], ['570', 46, 42, 30]].map(([cx, r1, r2, r3]) => (
-        <g key={cx}>
-          <circle cx={cx} cy="214" r={r1} fill="#0a1424" />
-          <circle cx={cx} cy="214" r={r2} fill="#15203a" />
-          <circle cx={cx} cy="214" r={r3} fill="#1f2b46" />
-          <g stroke="url(#hRim)" strokeWidth="4" strokeLinecap="round">
-            <line x1={cx} y1={cx === '170' ? '190' : '186'} x2={cx} y2={cx === '170' ? '238' : '242'} />
-            <line x1={Number(cx) - (cx === '170' ? 24 : 28)} y1="214" x2={Number(cx) + (cx === '170' ? 24 : 28)} y2="214" />
-            <line x1={Number(cx) - (cx === '170' ? 17 : 20)} y1={cx === '170' ? '197' : '194'} x2={Number(cx) + (cx === '170' ? 17 : 20)} y2={cx === '170' ? '231' : '234'} />
-            <line x1={Number(cx) + (cx === '170' ? 17 : 20)} y1={cx === '170' ? '197' : '194'} x2={Number(cx) - (cx === '170' ? 17 : 20)} y2={cx === '170' ? '231' : '234'} />
-          </g>
-          <circle cx={cx} cy="214" r="5" fill="url(#hRim)" />
-        </g>
-      ))}
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{p[name]}</svg>
   );
 }
 
-function DashboardChart() {
+// A faithful mockup of the Laventra owner app's Home tab, rebuilt from the real
+// Flutter screens so the marketing site shows the actual product.
+function AppPhone() {
+  const c = { blue: 'var(--p-blue)', teal: 'var(--p-teal)', amber: 'var(--p-amber)', red: 'var(--p-red)', purple: 'var(--p-purple)' };
   return (
-    <svg viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="cFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2B7FFF" stopOpacity=".35" /><stop offset="100%" stopColor="#00C896" stopOpacity="0" /></linearGradient>
-        <linearGradient id="cLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#2B7FFF" /><stop offset="100%" stopColor="#00C896" /></linearGradient>
-      </defs>
-      <g stroke="rgba(91,186,255,.08)" strokeWidth="1">
-        <line x1="0" y1="50" x2="600" y2="50" /><line x1="0" y1="100" x2="600" y2="100" /><line x1="0" y1="150" x2="600" y2="150" />
-      </g>
-      <path d="M 0 150 L 40 140 L 80 110 L 120 90 L 160 60 L 200 38 L 240 50 L 280 78 L 320 50 L 360 30 L 400 58 L 440 86 L 480 110 L 520 130 L 560 148 L 600 158 L 600 200 L 0 200 Z" fill="url(#cFill)" />
-      <path d="M 0 150 L 40 140 L 80 110 L 120 90 L 160 60 L 200 38 L 240 50 L 280 78 L 320 50 L 360 30 L 400 58 L 440 86 L 480 110 L 520 130 L 560 148 L 600 158" stroke="url(#cLine)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M 0 158 L 40 152 L 80 128 L 120 108 L 160 78 L 200 60 L 240 70 L 280 96 L 320 70 L 360 52 L 400 78 L 440 100 L 480 124 L 520 142 L 560 160 L 600 168" stroke="#ffaa50" strokeWidth="1.8" strokeDasharray="4 4" fill="none" strokeLinecap="round" opacity=".8" />
-      <circle cx="360" cy="30" r="5" fill="#fff" stroke="url(#cLine)" strokeWidth="2" />
-    </svg>
+    <div className="phone" role="img" aria-label="The Laventra owner app, Home tab: 412 washes today, 7 of 8 devices online, 3 pending alerts, the active-devices list, and a live feed of recent wash events by number plate.">
+      <div className="phone-screen">
+        <span className="phone-notch" />
+        <div className="app-scroll">
+          <div className="app-h">
+            <span className="app-logo">L</span>
+            <span className="greet"><small>Good morning, Marco</small><b>Dashboard</b></span>
+            <span className="app-bell"><Icon name="bell" /></span>
+          </div>
+          <div className="app-grid">
+            {appStats.map(([k, v, s, col]) => (
+              <div className="app-stat" key={k}>
+                <span className="k">{k}</span>
+                <span className="v" style={{ color: c[col] }}>{v}</span>
+                <span className="s">{s}</span>
+              </div>
+            ))}
+          </div>
+          <div className="app-card2">
+            <div className="ct"><b>Active Devices</b><span className="lnk">7 online · 1 offline</span></div>
+            {appDevices.map(([name, sub, icon, accent, pill, pc]) => (
+              <div className="app-row" key={name}>
+                <span className="ic" style={{ color: c[accent] }}><Icon name={icon} /></span>
+                <span className="tx"><b>{name}</b><small>{sub}</small></span>
+                <span className={`pill ${pc}`}>{pill}</span>
+              </div>
+            ))}
+          </div>
+          <div className="app-card2">
+            <div className="ct"><b>Recent Events</b><a className="see">See all</a></div>
+            {appEvents.map(([plate, sub, ok]) => (
+              <div className="app-row" key={plate}>
+                <span className="ic" style={{ color: ok ? c.teal : c.red }}><Icon name="car" /></span>
+                <span className="tx"><b className="plate">{plate}</b><small>{sub}</small></span>
+                <span className={`pill ${ok ? 'teal' : 'red'}`}>{ok ? 'Done' : 'Err'}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="app-nav2">
+          {appNav.map(([icon, label, on]) => (
+            <span key={label} className={on ? 'on' : ''}><PhoneNavIcon name={icon} />{label}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// The site has no backend, so the demo request is composed into a prefilled
+// email the visitor sends from their own client — a real, working hand-off
+// rather than a dead button.
+function DemoForm() {
+  const [sent, setSent] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const name = (f.get('name') || '').toString().trim();
+    const site = (f.get('site') || '').toString().trim();
+    const bays = (f.get('bays') || '').toString().trim();
+    const email = (f.get('email') || '').toString().trim();
+    const subject = encodeURIComponent(`Demo request - ${site || name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nSite / company: ${site}\nNumber of bays: ${bays}\nReply-to: ${email}\n\nI'd like a 15-minute Laventra demo.`,
+    );
+    window.location.href = `mailto:sales@laventra.io?subject=${subject}&body=${body}`;
+    setSent(true);
+  }
+
+  return (
+    <form className="demo-form" onSubmit={handleSubmit}>
+      <div className="df-row">
+        <input name="name" type="text" placeholder="Your name" required aria-label="Your name" />
+        <input name="site" type="text" placeholder="Site or company" aria-label="Site or company" />
+      </div>
+      <div className="df-row">
+        <input name="email" type="email" placeholder="Work email" required aria-label="Work email" />
+        <input name="bays" type="number" min="1" placeholder="Bays" aria-label="Number of bays" />
+      </div>
+      <button type="submit" className="btn btn-primary df-submit">Book my 15-min demo &rarr;</button>
+      {sent && <p className="df-sent">Opening your email app — if nothing happens, write us at <a href="mailto:sales@laventra.io">sales@laventra.io</a>.</p>}
+    </form>
   );
 }
 
@@ -217,7 +310,7 @@ export default function App() {
           <Wordmark />
           <div className="nav-links">{navLinks.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div>
           <div className="nav-cta">
-            <a href="#login" className="btn btn-ghost nav-btn">Sign in</a>
+            <a href="https://app.laventra.io" className="btn btn-ghost nav-btn">Sign in</a>
             <a href="#cta" className="btn btn-primary nav-btn">Book a demo</a>
           </div>
         </div>
@@ -228,37 +321,43 @@ export default function App() {
           <div>
             <span className="eyebrow">AI · Car-Wash Counter</span>
             <h1 className="h1 hero-title">Stop counting cars.<br /><em>Start counting revenue.</em></h1>
-            <p className="lede hero-copy">Laventra reads every vehicle that rolls through your bay with computer vision, reconciles it against tickets, cash, and operator counts, and tells you, to the car, how many washes you actually sold today.</p>
+            <p className="lede hero-copy">A camera over each bay feeds an on-site AI that logs every vehicle the moment it's washed. The count, the clip and the alerts land in your phone in real time - so you always know, to the car, how many washes you actually sold today.</p>
             <div className="hero-actions">
               <a href="#cta" className="btn btn-primary">Book a 15-min demo &rarr;</a>
-              <a href="#how" className="btn btn-ghost">See how it works</a>
+              <a href="#dashboard" className="btn btn-ghost">See the app</a>
             </div>
             <div className="hero-tags">
               <span><i /> 99.4% counting accuracy</span>
-              <span><i /> Installs in under a day</span>
-              <span><i /> No new hardware in the bay</span>
+              <span><i /> Live on iOS &amp; Android</span>
+              <span><i /> Push alerts when a bay drops</span>
             </div>
           </div>
 
           <div className="bay" aria-hidden="true">
             <div className="bay-chip"><i /> Bay 01 · Live</div>
-            <div className="bay-counter"><span className="lbl">Today · Bay 01</span><span className="val">412</span><span className="delta">▲ 18 vs ticket count</span></div>
-            <div className="bay-arch" /><div className="bay-spray" /><div className="bay-floor" />
-            <div className="bay-car"><HeroCar /></div>
+            <div className="bay-counter"><span className="lbl">Today · Bay 01</span><span className="val">412</span><span className="delta flag">⚑ 18 unticketed · flagged</span></div>
+            <div className="bay-arch" /><span className="bay-arch-r" /><div className="bay-spray" /><div className="bay-floor" />
+            <div className="bay-car"><img src="/assets/car-clean.png" alt="" draggable="false" /></div>
             <div className="bay-bullets">
               <div>SCAN · <b>VEHICLE_CLASS = sedan</b></div>
               <div>EVENT · <b>WASH_START 14:32:08</b></div>
-              <div>RECONCILED · <b>TICKET #4192</b></div>
+              <div>SYNCED · <b>EVENT #4192 → APP</b></div>
             </div>
           </div>
+          <p className="sr-only">Product preview: a live wash-bay view for Bay 01 showing 412 cars counted today, with each vehicle logged as an event and synced to the owner's phone.</p>
         </div>
       </header>
 
       <section className="trust section-tight">
-        <div className="container trust-row">
-          <div className="label">Operating in <strong>42 sites</strong> across 6 countries</div>
-          <div className="trust-logos">
-            {['Splash&Co', 'AquaBay', 'NorthLane', 'BaharAuto', 'Suds 9•', 'VettaLavaggio'].map((logo) => <div className="logo" key={logo}>{logo}</div>)}
+        <div className="container">
+          <div className="trust-metrics">
+            {[['42', 'sites live'], ['6', 'countries'], ['3.2M', 'cars counted'], ['99.4%', 'counting accuracy'], ['$1.8M', 'recovered for owners']].map(([n, l]) => (
+              <div className="metric" key={l}><span className="m-num">{n}</span><span className="m-lbl">{l}</span></div>
+            ))}
+          </div>
+          <div className="trust-pos">
+            <span className="trust-pos-label">Camera in, phone out</span>
+            <div className="pos-logos">{['Any IP camera', 'Hikvision', 'Dahua', 'iOS app', 'Android app'].map((p) => <span className="pos" key={p}>{p}</span>)}</div>
           </div>
         </div>
       </section>
@@ -285,8 +384,8 @@ export default function App() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">How it works</span>
-            <h2 className="h2">From a single camera to a clean balance sheet.</h2>
-            <p className="lede">Laventra runs on the camera you already have at the bay entrance. No tunnels, no loops in the concrete, no new wiring.</p>
+            <h2 className="h2">From the camera in the bay to the app in your pocket.</h2>
+            <p className="lede">Laventra runs on the camera you already have at the bay entrance, turns every wash into an event on the server, and puts it all in your phone. No tunnels, no loops in the concrete, no new wiring.</p>
           </div>
           <div className="how-steps">
             {steps.map(([ix, title, desc, icon]) => (
@@ -317,40 +416,26 @@ export default function App() {
       <section id="dashboard">
         <div className="container">
           <div className="section-head compact-head">
-            <span className="eyebrow">The control room</span>
-            <h2 className="h2">One screen. Every bay. Every car.</h2>
-            <p className="lede">Owners check Laventra the way they used to check the bank app. Here is what they see.</p>
+            <span className="eyebrow">In your pocket</span>
+            <h2 className="h2">The whole car wash, on your phone.</h2>
+            <p className="lede">The owner opens the Laventra app the way they used to check the bank app. Here is exactly what they see.</p>
           </div>
-          <div className="dash">
-            <div>
-              <div className="dash-head"><span><span className="dot" />Today · 26 May 2026</span><span>Site · Brisbane Lavaggio</span></div>
-              <div className="dash-stats">
-                <div className="dash-tile"><span className="k">Cars washed</span><span className="v grad">412</span><span className="d">▲ 6.2% vs Tue</span></div>
-                <div className="dash-tile"><span className="k">Reconciled</span><span className="v">394</span><span className="d">▲ 95.6% match</span></div>
-                <div className="dash-tile"><span className="k">Phantom</span><span className="v warn-text">18</span><span className="d warn-text">▼ flag for review</span></div>
-                <div className="dash-tile"><span className="k">Revenue</span><span className="v grad">$6,872</span><span className="d">▲ $412 recovered</span></div>
-              </div>
-              <div className="dash-tile feed-tile">
-                <div className="dash-head"><span>Live feed · Bay 01</span><span>14:38:22</span></div>
-                <div className="dash-feed">
-                  {feedRows.map(([time, label, badge, warn]) => <div className="feed-row" key={time + label}><span className="t">{time}</span><span className="p">{label}</span><span className={`b ${warn ? 'warn' : ''}`}>{badge}</span></div>)}
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="dash-head"><span>Cars per hour · 7-day rolling</span><span className="mono chart-times"><span>06:00</span><span>14:00</span><span>22:00</span></span></div>
-              <div className="dash-tile chart-tile">
-                <div className="chart-wrap"><DashboardChart /></div>
-                <div className="chart-legend"><span><i className="legend-count" />Cars counted</span><span><i className="legend-ticket" />Tickets sold</span><span className="peak">Peak 14:00 · 47 cars/hr</span></div>
-              </div>
-              <div className="dash-tile recovered">
-                <div className="dash-head"><span>Recovered this month</span><span className="green">+ $4,820</span></div>
-                {['From phantom washes|$3,140', 'From operator drift|$980', 'From voided tickets|$700'].map((row) => {
-                  const [label, value] = row.split('|');
-                  return <div className="recovered-row" key={label}><span>{label}</span><span>{value}</span></div>;
-                })}
-              </div>
-            </div>
+          <div className="app-show">
+            <ul className="app-points">
+              {[
+                ["Today's washes, live", 'Every bay counting up as the cars roll through - no waiting for an end-of-day report.'],
+                ['Every event, with the plate and a clip', 'Tap any wash to see the vehicle, the time, the device, and the footage behind it.'],
+                ['Device health at a glance', 'Cameras and AI boxes, online or offline - you hear about a dead bay before your staff does.'],
+                ['Push the second it matters', 'A bay drops, errors spike, or a line forms - your phone buzzes in real time.'],
+                ['All your lavaggi in one place', 'Switch sites, compare shifts, and roll every bay into one owner view.'],
+              ].map(([title, desc]) => (
+                <li className="app-point" key={title}>
+                  <CheckMark size={20} />
+                  <div><h3>{title}</h3><p>{desc}</p></div>
+                </li>
+              ))}
+            </ul>
+            <div className="phone-wrap"><AppPhone /></div>
           </div>
         </div>
       </section>
@@ -358,9 +443,14 @@ export default function App() {
       <section id="roi">
         <div className="container">
           <div className="roi">
-            <div><span className="eyebrow">Typical ROI</span><div className="roi-num">8.4x</div><p className="lede">Return on Laventra in the first 90 days, for a single-bay site doing about 80 cars / day.</p></div>
+            <div>
+              <span className="eyebrow">Typical ROI</span>
+              <div className="roi-num">$1,650</div>
+              <p className="lede">Recovered every month on a typical single-bay site - against $89 for the Starter plan. Laventra pays for itself before the 2nd of the month, then keeps going.</p>
+              <p className="roi-assume mono">Modeled on 80 cars/day · $14 avg ticket · recovering a conservative 5% leak (industry average runs up to 12%).</p>
+            </div>
             <ul className="roi-list">
-              {['~$1,600/mo recovered|from phantom washes alone (industry avg 12%).', '14 hours/month saved|on shift reconciliation. That is a whole admin day back.', '+9% throughput|after operators learn the system is watching the count.', 'Zero capex.|Runs on your existing IP cam. No tunnel sensors to install.'].map((item) => {
+              {['~$1,650/mo recovered|from washes that never reached a ticket - modeled at less than half the industry-average leak.', '14 hours/month saved|on shift reconciliation. That is a whole admin day back, every month.', '+9% throughput|once peak alerts let you open the next bay before the line forms.', 'Zero capex.|Runs on your existing IP cam, with your first camera and onboarding included.'].map((item) => {
                 const [strong, text] = item.split('|');
                 return <li key={strong}><CheckMark size={20} /><span><b>{strong}</b> {text}</span></li>;
               })}
@@ -369,11 +459,19 @@ export default function App() {
         </div>
       </section>
 
-      <section>
+      <section id="customers">
         <div className="container">
-          <div className="quote">
-            <p>The first week we plugged it in, Laventra found 31 washes that never made it to a ticket. That is not a software bill anymore - that is a raise. I check it before I check the bank.</p>
-            <div className="quote-by"><div className="avatar">MD</div><div><div className="name">Marco D'Auria</div><div className="role">Owner · Lavaggio Bahar (3 bays, Naples)</div></div></div>
+          <div className="section-head center-head">
+            <span className="eyebrow">From the bay</span>
+            <h2 className="h2">Operators who stopped guessing.</h2>
+          </div>
+          <div className="quotes-grid">
+            {testimonials.map((t) => (
+              <figure className="quote" key={t.name}>
+                <blockquote>{t.quote}</blockquote>
+                <figcaption className="quote-by"><div className="avatar">{t.initials}</div><div><div className="name">{t.name}</div><div className="role">{t.role}</div></div></figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
@@ -383,7 +481,7 @@ export default function App() {
           <div className="section-head">
             <span className="eyebrow">Pricing</span>
             <h2 className="h2">Pay per bay. Cancel any month.</h2>
-            <p className="lede">Every plan includes the AI counter, POS reconciliation, audit clips, and 24-month video retention. No long contracts. No hardware to buy.</p>
+            <p className="lede">Every plan includes the AI counter, the iOS &amp; Android app, the per-vehicle event log with clips, push alerts, and 24-month video retention. No long contracts.</p>
           </div>
           <div className="pricing-grid">
             {plans.map((plan) => (
@@ -395,6 +493,7 @@ export default function App() {
               </article>
             ))}
           </div>
+          <p className="pricing-note">A <strong>bay</strong> is one camera on one wash lane. Billed monthly - cancel anytime - or save two months on annual. Onboarding and your first PoE camera are included free; no setup fee.</p>
         </div>
       </section>
 
@@ -416,7 +515,8 @@ export default function App() {
             <span className="eyebrow">Ready when you are</span>
             <h2>See your real car count by Friday.</h2>
             <p>Book a 15-minute demo. We will pull your last week of POS data, run it through Laventra against a sample of your camera feed, and show you the gap on the call.</p>
-            <div className="row"><a href="#" className="btn btn-primary">Book a demo &rarr;</a><a href="mailto:sales@laventra.io" className="btn btn-ghost">Email sales@laventra.io</a></div>
+            <DemoForm />
+            <p className="small cta-or">Prefer email? Write us at <a href="mailto:sales@laventra.io">sales@laventra.io</a>.</p>
             <p className="small mono cta-note">No card · No commitment · Cancel anytime</p>
           </div>
         </div>
@@ -427,10 +527,10 @@ export default function App() {
           <div className="foot">
             <div><Wordmark size={32} /><p className="small foot-copy">The AI car-wash counter. Count every car. Reconcile every ticket. Keep every dollar.</p></div>
             {[
-              ['Product', ['Features', 'Dashboard', 'Pricing', 'Changelog']],
-              ['Company', ['About', 'Customers', 'Careers', 'Contact']],
-              ['Legal', ['Privacy', 'Terms', 'DPA', 'Security']],
-            ].map(([title, links]) => <div key={title}><h4>{title}</h4>{links.map((link) => <a href="#" key={link}>{link}</a>)}</div>)}
+              ['Product', [['Features', '#features'], ['The app', '#dashboard'], ['Pricing', '#pricing'], ['FAQ', '#faq']]],
+              ['Company', [['How it works', '#how'], ['Customers', '#customers'], ['Careers', 'mailto:careers@laventra.io'], ['Contact', '#cta']]],
+              ['Legal', [['Privacy', '/legal/privacy.html'], ['Terms', '/legal/terms.html'], ['DPA', '/legal/dpa.html'], ['Security', '/legal/security.html']]],
+            ].map(([title, links]) => <div key={title}><h4>{title}</h4>{links.map(([label, href]) => <a href={href} key={label}>{label}</a>)}</div>)}
           </div>
           <div className="foot-bottom"><span>© 2026 Laventra · Built for the lavaggio</span><span>v 1.4 · Status · All systems operational</span></div>
         </div>
